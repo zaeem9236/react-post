@@ -8,14 +8,17 @@ function App() {
 
   useEffect(() => {
     authService.getCurrentUser()
-    .then(data => console.log(data))
+    .then((data) => {
+      console.log(data)
+      setLoading(false)
+    })
     .catch(err => console.log(err))
   }, [])
 
   return (
     <div className={`h-screen w-screen bg-gray-200 dark:bg-gray-900`}>
       <Header />
-      <h6 className="text-3xl text-gray-500">react-post</h6>
+      {!loading? <h6 className="text-3xl text-white">react-post</h6>: <h1 className='text-4xl text-red-600'>Loading</h1>}
       <Footer />
     </div>
   )
