@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Header, Footer } from './components/index'
 import { useDispatch } from 'react-redux'
+import { login } from './redux/slices/authSlice'
 import { authService } from './appwrite/auth'
 function App() {
   const [loading, setLoading] = useState(true)
@@ -9,8 +10,8 @@ function App() {
   useEffect(() => {
     authService.getCurrentUser()
       .then((data) => {
-        console.log(data)
         setLoading(false)
+        dispatch(login(data))
       })
       .catch(err => console.log(err))
   }, [])
