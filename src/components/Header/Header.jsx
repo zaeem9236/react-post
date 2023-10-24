@@ -1,11 +1,18 @@
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { authService } from "../../appwrite/auth"
+import { logout } from "../../redux/slices/authSlice"
 
 
 export const Header = () => {
+    const dispatch = useDispatch()
     const loggedIn = useSelector(state => state?.authSlice?.status)
+    const handleLogout = () => {
+        authService.logout()
+            .then((data) => dispatch(logout()))
+            .catch(err => console.log(err))
+    }
     return (
         <div>
-
             <nav className="bg-white border-gray-200 dark:bg-gray-900">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <a href="https://flowbite.com/" className="flex items-center">
@@ -36,7 +43,7 @@ export const Header = () => {
                                 <a href="#" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
                             </li>
                             {loggedIn &&
-                                <li>
+                                <li onClick={handleLogout}>
                                     <a href="#" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-red-300 md:hover:bg-transparent md:border-0 md:hover:text-red-600 md:p-0 dark:text-white md:dark:hover:text-red-600 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Logout</a>
                                 </li>
                             }
