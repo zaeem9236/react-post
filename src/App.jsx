@@ -19,9 +19,12 @@ function App() {
   return (
     <div className={`h-screen w-screen bg-gray-200 dark:bg-gray-900`}>
       <Header />
+
+      <InputField label='Email' placeholder='Enter your email' />
+      <InputField label='Email' placeholder='Enter your password' />
       {/* temp button to login */}
-      <Button  onClick={() => authService.login({email: 'abc@abc.com', password: '123456789'})} btnText="Login" className='hover:bg-green-700 duration-500' disabled={false} />
-      
+      <Button onClick={() => authService.login({ email: 'abc@abc.com', password: '123456789' })} btnText="Login" className='hover:bg-green-700 duration-500' disabled={false} />
+
       {loading ? <h1 className='text-4xl text-red-600'>Loading</h1> : <h6 className="text-3xl text-white">react-post</h6>}
       <Footer />
     </div>
