@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Header, Footer, Button } from './components/index'
+import { Header, Footer, Button, InputField } from './components/index'
 import { useDispatch } from 'react-redux'
 import { login } from './redux/slices/authSlice'
 import { authService } from './appwrite/auth'
