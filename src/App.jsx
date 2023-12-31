@@ -21,7 +21,7 @@ function App() {
       <Header />
 
       <InputField label='Email' placeholder='Enter your email' />
-      <InputField label='Email' placeholder='Enter your password' />
+      <InputField label='Password' placeholder='Enter your password' />
       {/* temp button to login */}
       <Button onClick={() => authService.login({ email: 'abc@abc.com', password: '123456789' })} btnText="Login" className='hover:bg-green-700 duration-500' disabled={false} />
 
