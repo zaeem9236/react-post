@@ -15,19 +15,20 @@ export function Login() {
     const { register, handleSubmit } = useForm()
     const [error, setError] = useState("")
 
-    // const login = async(data) => {
-    //     setError("")
-    //     try {
-    //         const session = await authService.login(data)
-    //         if (session) {
-    //             const userData = await authService.getCurrentUser()
-    //             if(userData) dispatch(authLogin(userData));
-    //             navigate("/")
-    //         }
-    //     } catch (error) {
-    //         setError(error.message)
-    //     }
-    // }
+    const login = async(data) => {console.log('zz')
+        setError("")
+        try {
+            const session = await authService.login(data)
+            console.log('session', session)
+            if (session) {
+                const userData = await authService.getCurrentUser()
+                if(userData) dispatch(authLogin(userData));
+                // navigate("/")
+            }
+        } catch (error) {
+            setError(error.message)
+        }
+    }
 
     return (
         <div
@@ -50,7 +51,7 @@ export function Login() {
                     </Link>
                 </p>
                 {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
-                <form /*onSubmit={handleSubmit(login)}*/ className='mt-8'>
+                {/* <form onSubmit={handleSubmit(login)} className='mt-8'> */}
                     <div className='space-y-5'>
                         <InputField
                             label="Email: "
@@ -76,12 +77,12 @@ export function Login() {
                         />
                         <Button
                             btnText='Login'
-                            type="submit"
+                            // type="submit"
                             className="w-full"
-                            onClick={()=>{console.log(`email: ${emailRef.current.value}`, `pass: ${passwordRef.current.value}`)}}
+                            onClick={()=>{login({email: emailRef.current.value, password: passwordRef.current.value})}}
                         >Sign in</Button>
                     </div>
-                </form>
+                {/* </form> */}
             </div>
         </div>
     )
