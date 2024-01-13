@@ -9,7 +9,10 @@ const InputField = ({
 }, ref) => {
   return <div>
     <label className="inline-block mb-1 pl-1">{label}</label>
-    <input type={type} placeholder={placeholder} ref={ref} {...props}/>
+    <input type={type}
+      placeholder={placeholder}
+      ref={ref}
+      {...props} />
   </div>;
 };
 

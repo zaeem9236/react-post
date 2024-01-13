@@ -9,5 +9,5 @@ export {
     Footer,
     Container,
     Button,
-    InputField
+    InputField,
 }
