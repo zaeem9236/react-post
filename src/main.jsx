@@ -8,15 +8,50 @@ import App from './App.jsx'
 import Home from './pages/Home.jsx'
 import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
+import AddPost from './pages/AddPost.jsx'
+import AllPosts from './pages/AllPosts.jsx'
+import { AuthLayout } from './components/index.js'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
     children: [
-      { path: '', element: <Home /> },
-      { path: 'signup', element: <Signup /> },
-      { path: 'login', element: <Login /> }
+      {
+        path: '', element: (
+          <AuthLayout authentication={true}>
+            <Home />
+          </AuthLayout>
+        )
+      },
+      {
+        path: 'signup', element: (
+          <AuthLayout authentication={false}>
+            <Signup />
+          </AuthLayout>
+        )
+      },
+      {
+        path: 'login', element: (
+          <AuthLayout authentication={false}>
+            <Login />
+          </AuthLayout>
+        )
+      },
+      {
+        path: 'add-post', element: (
+          <AuthLayout authentication={true}>
+            <AddPost />
+          </AuthLayout>
+        )
+      },
+      {
+        path: 'all-posts', element: (
+          <AuthLayout authentication={true}>
+            <AllPosts />
+          </AuthLayout>
+        )
+      }
     ]
   },
 ])

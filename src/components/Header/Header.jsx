@@ -12,6 +12,35 @@ export const Header = () => {
             .then((data) => dispatch(logout()))
             .catch(err => console.log(err))
     }
+
+    const navItems = [
+        {
+            name: 'Home',
+            path: '/',
+            active: true
+        },
+        {
+            name: 'Login',
+            path: '/login',
+            active: !loggedIn
+        },
+        {
+            name: 'Signup',
+            path: '/signup',
+            active: !loggedIn
+        },
+        {
+            name: "All Posts",
+            path: "/all-posts",
+            active: loggedIn,
+        },
+        {
+            name: "Add Post",
+            path: "/add-post",
+            active: loggedIn,
+        },
+    ]
+
     return (
         <div>
             <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -28,15 +57,23 @@ export const Header = () => {
                     </button>
                     <div className="hidden w-full md:block md:w-auto" id="navbar-default">
                         <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                            <li>
+                            {navItems.map((item) => item.active ? (
+                                <li key={item.name}>
+                                    <Link to={item.path} className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">{item.name}</Link>
+                                </li>
+                            )
+                                :
+                                null)}
+
+                            {/* <li>
                                 <Link to='/' className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Home</Link>
                             </li>
                             <li>
-                                <Link to='/login' className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</Link>
+                                <Link to='/login' className="c">Login</Link>
                             </li>
                             <li>
                                 <Link to='/signup' className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Signup</Link>
-                            </li>
+                            </li> */}
                             {loggedIn &&
                                 <li onClick={handleLogout}>
                                     <Link className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-red-300 md:hover:bg-transparent md:border-0 md:hover:text-red-600 md:p-0 dark:text-white md:dark:hover:text-red-600 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Logout</Link>
