@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { Button, InputField, RTE, Select } from "../index";
-import { DbService } from "../../appwrite/db";
+import { dbService } from "../../appwrite/db";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -17,37 +17,39 @@ export default function PostForm({ post }) {
 
     const navigate = useNavigate();
     const userData = useSelector((state) => state.authSlice.userData);
-
+    
     const submit = async (data) => {
-        console.log('data...', data)
-        if (post) {
-            const file = data.image[0] ? await DbService.uploadFile(data.image[0]) : null;
+        console.log('userData  -->  ', userData)
 
-            if (file) {
-                // DbService.deleteFile(post.featuredImage);
-            }
+        // if (post) {
+        //     const file = data.image[0] ? await DbService.uploadFile(data.image[0]) : null;
 
-            // const dbPost = await DbService.updatePost(post.$id, {
-            //     ...data,
-            //     featuredImage: file ? file.$id : undefined,
-            // });
+        //     if (file) {
+        //         // DbService.deleteFile(post.featuredImage);
+        //     }
 
-            // if (dbPost) {
-            //     navigate(`/post/${dbPost.$id}`);
-            // }
-        } else {
-            const file = await DbService.uploadFile(data.image[0]);
+        //     // const dbPost = await DbService.updatePost(post.$id, {
+        //     //     ...data,
+        //     //     featuredImage: file ? file.$id : undefined,
+        //     // });
 
-            if (file) {
-                const fileId = file.$id;
-                data.featuredImage = fileId;
-                const dbPost = await DbService.createPost({ ...data, userId: userData.$id });
+        //     // if (dbPost) {
+        //     //     navigate(`/post/${dbPost.$id}`);
+        //     // }
+        // } else { console.log('else part');console.log('else par -- ', data.image[0])
+        //     const file = data.image[0] ? await dbService.uploadFile(data.image[0]) : null;
+            
+        //     if (file) {
+        //         const fileId = file.$id;
+        //         data.featuredImage = fileId;
+        //         console.log('userData: ', userData)
+        //         const dbPost = await dbService.createPost({ ...data, userId: userData.$id });
 
-                if (dbPost) {
-                    navigate(`/post/${dbPost.$id}`);
-                }
-            }
-        }
+        //         if (dbPost) {
+        //             navigate(`/post/${dbPost.$id}`);
+        //         }
+        //     }
+        // }
     };
 
     const slugTransform = useCallback((value) => {
@@ -77,17 +79,17 @@ export default function PostForm({ post }) {
                 <InputField
                     label="Title :"
                     placeholder="Title"
-                    className="mb-4"
                     {...register("title", { required: true })}
+                    className="mb-4"
                 />
                 <InputField
                     label="Slug :"
                     placeholder="Slug"
-                    className="mb-4"
                     {...register("slug", { required: true })}
                     onInput={(e) => {
                         setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
                     }}
+                    className="mb-4"
                 />
                 <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
             </div>
@@ -97,7 +99,7 @@ export default function PostForm({ post }) {
                     type="file"
                     className="mb-4"
                     accept="image/png, image/jpg, image/jpeg, image/gif"
-                    {...register("image", { required: !post })}
+                    {...register("image", { required: /*!post*/ false })}
                 />
                 {post && (
                     <div className="w-full mb-4">
@@ -116,8 +118,8 @@ export default function PostForm({ post }) {
                 />
                 <Button
                     // onClick={submit}
+                    type="submit"
                     btnText={post ? "Update" : "Submit"}
-                    // type="submit"
                     bgColor={post ? "bg-green-500" : undefined}
                     className="w-full">
 

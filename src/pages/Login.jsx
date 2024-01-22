@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { InputField, Button } from "../components/index";
 import { useDispatch } from 'react-redux'
-import { login } from '../redux/slices/authSlice'
+import { login as authLogin } from '../redux/slices/authSlice'
 import { authService } from '../appwrite/auth'
 
 import {Login as LoginComponent} from "../components/Login/Login";
@@ -14,11 +14,10 @@ const Login = () => {
 
   useEffect(() => {
     authService.getCurrentUser()
-      .then((data) => {
+      .then((userData) => {
         setLoading(false)
-        dispatch(login(data))
+        dispatch(authLogin(userData))
       })
-      .catch(err => console.log(err))
   }, [])
 
   return <div>

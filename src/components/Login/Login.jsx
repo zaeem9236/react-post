@@ -10,22 +10,24 @@ export function Login() {
     const emailRef = useRef(null)
     const passwordRef = useRef(null)
 
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const { register, handleSubmit } = useForm()
     const [error, setError] = useState("")
 
-    const login = async(data) => {console.log('zz')
+    const login = async(data) => {console.log(data)
         setError("")
         try {
             const session = await authService.login(data)
-            console.log('session', session)
+            // console.log('session', session)
             if (session) {
                 const userData = await authService.getCurrentUser()
-                if(userData) dispatch(authLogin(userData));
-                // navigate("/")
+                console.log('ppz', userData)
+                if(userData) {dispatch(authLogin(userData))
+                navigate("/")
+                }
             }
-        } catch (error) {
+        } catch (error) {console.log('err22', error)
             setError(error.message)
         }
     }
