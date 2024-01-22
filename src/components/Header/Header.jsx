@@ -7,6 +7,7 @@ import { logout } from "../../redux/slices/authSlice"
 export const Header = () => {
     const dispatch = useDispatch()
     const loggedIn = useSelector(state => state?.authSlice?.status)
+    console.log('LLM', loggedIn)
     const handleLogout = () => {
         authService.logout()
             .then((data) => dispatch(logout()))

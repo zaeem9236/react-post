@@ -10,6 +10,8 @@ import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
 import AddPost from './pages/AddPost.jsx'
 import AllPosts from './pages/AllPosts.jsx'
+import Post from './pages/Post.jsx'
+import EditPost from './pages/EditPost.jsx'
 import { AuthLayout } from './components/index.js'
 
 const router = createBrowserRouter([
@@ -51,7 +53,21 @@ const router = createBrowserRouter([
             <AllPosts />
           </AuthLayout>
         )
-      }
+      },
+      {
+        path: "/post/:slug", element: (
+          <AuthLayout authentication={true}>
+            <Post />
+          </AuthLayout>
+        )
+      },
+      {
+        path: "/edit-post/:slug", element: (
+          <AuthLayout authentication={true}>
+            < EditPost />
+          </AuthLayout>
+        )
+      },
     ]
   },
 ])

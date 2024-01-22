@@ -21,35 +21,35 @@ export default function PostForm({ post }) {
     const submit = async (data) => {
         console.log('userData  -->  ', userData)
 
-        // if (post) {
-        //     const file = data.image[0] ? await DbService.uploadFile(data.image[0]) : null;
+        if (post) {
+            const file = data.image[0] ? await dbService.uploadFile(data.image[0]) : null;
 
-        //     if (file) {
-        //         // DbService.deleteFile(post.featuredImage);
-        //     }
+            if (file) {
+                dbService.deleteFile(post.featuredImage);
+            }
 
-        //     // const dbPost = await DbService.updatePost(post.$id, {
-        //     //     ...data,
-        //     //     featuredImage: file ? file.$id : undefined,
-        //     // });
+            const dbPost = await dbService.updatePost(post.$id, {
+                ...data,
+                featuredImage: file ? file.$id : undefined,
+            });
 
-        //     // if (dbPost) {
-        //     //     navigate(`/post/${dbPost.$id}`);
-        //     // }
-        // } else { console.log('else part');console.log('else par -- ', data.image[0])
-        //     const file = data.image[0] ? await dbService.uploadFile(data.image[0]) : null;
+            if (dbPost) {
+                navigate(`/post/${dbPost.$id}`);
+            }
+        } else { console.log('else part');console.log('else par -- ', data.image[0])
+            const file = data.image[0] ? await dbService.uploadFile(data.image[0]) : null;
             
-        //     if (file) {
-        //         const fileId = file.$id;
-        //         data.featuredImage = fileId;
-        //         console.log('userData: ', userData)
-        //         const dbPost = await dbService.createPost({ ...data, userId: userData.$id });
-
-        //         if (dbPost) {
-        //             navigate(`/post/${dbPost.$id}`);
-        //         }
-        //     }
-        // }
+            if (file) {
+                const fileId = file.$id;
+                data.featuredImage = fileId;
+                console.log('userData: ', userData)
+                const dbPost = await dbService.createPost({ ...data, userId: userData.$id });
+                console.log(dbPost)
+                if (dbPost) {
+                    navigate(`/post/${dbPost.$id}`);
+                }
+            }
+        }
     };
 
     const slugTransform = useCallback((value) => {
@@ -104,7 +104,7 @@ export default function PostForm({ post }) {
                 {post && (
                     <div className="w-full mb-4">
                         <img
-                            src={appwriteService.getFilePreview(post.featuredImage)}
+                            src={dbService.getFilePreview(post.featuredImage)}
                             alt={post.title}
                             className="rounded-lg"
                         />
