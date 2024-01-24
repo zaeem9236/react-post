@@ -114,7 +114,7 @@ export default function PostForm({ post }) {
                     className="mb-4"
                     accept="image/png, image/jpg, image/jpeg, image/gif"
                     {...register("image", { 
-                        required: { value: true,  message: 'No Image Uploaded' } })}
+                        required: { value: !post,  message: 'No Image Uploaded' } })}
                 />
                 {errors?.image?.message && <p className="text-red-600 pb-1 text-center">{errors.image.message}</p>}
                 {post && (
