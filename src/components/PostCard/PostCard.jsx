@@ -28,7 +28,7 @@ function PostCard({ $id, title, featuredImage, status, userId, currentUser }) {
           <h5 className="mb-2 text-md font-medium tracking-tight text-gray-900 dark:text-white">{`${title.length > 25 ? title.substring(0, 25) + '...' : title}`}</h5>
           <div className='flex justify-between items-center'>
             <div>
-              <span className={`${status == 'active' ? 'dark:bg-green-900 dark:text-green-300' : 'dark:bg-red-900 dark:text-red-300'} inline-flex items-center  text-xs font-medium px-2.5 py-0.5 rounded-full`}>
+              <span className={`${status == 'active' ? 'dark:bg-green-900 dark:text-green-300' : 'dark:bg-red-900 dark:text-red-300'} inline-flex items-center  text-xs font-medium px-2.5 py-0.5 rounded-full capitalize`}>
                 <span className={`w-2 h-2 me-1 ${status == 'active'? 'bg-green-500' : 'bg-red-500'}  rounded-full`}></span>
                 {status}
               </span>
