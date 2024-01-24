@@ -7,14 +7,14 @@ import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 
 export const Signup = () => {
-    const nameRef = useRef(null)
-    const emailRef = useRef(null)
-    const passwordRef = useRef(null)
+    // const nameRef = useRef(null)
+    // const emailRef = useRef(null)
+    // const passwordRef = useRef(null)
 
     const navigate = useNavigate()
     const [error, setError] = useState("")
     const dispatch = useDispatch()
-    // const {register, handleSubmit} = useForm()
+    const {register, handleSubmit} = useForm()
 
     const createAccount = async (data) => {
         setError("")
@@ -50,37 +50,37 @@ export const Signup = () => {
                 </p>
                 {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
 
-                {/* <form onSubmit={handleSubmit(create)}> */}
+                <form onSubmit={handleSubmit(createAccount)}>
                 <div className='space-y-5'>
                     <InputField
                         label="Full Name: "
                         placeholder="Enter your full name"
-                        ref={nameRef}
-                    // {...register("name", {
-                    //     required: true,
-                    // })}
+                        // ref={nameRef}
+                    {...register("name", {
+                        required: true,
+                    })}
                     />
                     <InputField
                         label="Email: "
                         placeholder="Enter your email"
                         type="email"
-                        ref={emailRef}
-                    // {...register("email", {
-                    //     required: true,
-                    //     validate: {
-                    //         matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
-                    //         "Email address must be a valid address",
-                    //     }
-                    // }
-                    // )}
+                        // ref={emailRef}
+                    {...register("email", {
+                        required: true,
+                        validate: {
+                            matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
+                            "Email address must be a valid address",
+                        }
+                    }
+                    )}
                     />
                     <InputField
                         label="Password: "
                         type="password"
                         placeholder="Enter your password"
-                        ref={passwordRef}
-                    // {...register("password", {
-                    //     required: true,})}
+                        // ref={passwordRef}
+                    {...register("password", {
+                        required: true,})}
                     />
                     <Button
                         btnText='Signup'
@@ -93,7 +93,7 @@ export const Signup = () => {
                         Create Account
                     </Button>
                 </div>
-                {/* </form> */}
+                </form>
             </div>
 
         </div>

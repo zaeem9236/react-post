@@ -53,38 +53,38 @@ export function Login() {
                     </Link>
                 </p>
                 {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
-                {/* <form onSubmit={handleSubmit(login)} className='mt-8'> */}
+                <form onSubmit={handleSubmit(login)} className='mt-8'>
                     <div className='space-y-5'>
                         <InputField
                             label="Email: "
                             placeholder="Enter your email"
                             type="email"
-                            ref={emailRef}
-                        // {...register("email", {
-                        //     required: true,
-                        //     validate: {
-                        //         matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
-                        //             "Email address must be a valid address",
-                        //     }
-                        // })}
+                            // ref={emailRef}
+                        {...register("email", {
+                            required: true,
+                            validate: {
+                                matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
+                                    "Email address must be a valid address",
+                            }
+                        })}
                         />
                         <InputField
                             label="Password: "
                             type="password"
                             placeholder="Enter your password"
-                            ref={passwordRef}
-                        // {...register("password", {
-                        //     required: true,
-                        // })}
+                            // ref={passwordRef}
+                        {...register("password", {
+                            required: true,
+                        })}
                         />
                         <Button
                             btnText='Login'
-                            // type="submit"
+                            type="submit"
                             className="w-full"
-                            onClick={()=>{login({email: emailRef.current.value, password: passwordRef.current.value})}}
+                            // onClick={()=>{login({email: emailRef.current.value, password: passwordRef.current.value})}}
                         >Sign in</Button>
                     </div>
-                {/* </form> */}
+                </form>
             </div>
         </div>
     )
