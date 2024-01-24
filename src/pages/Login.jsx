@@ -16,22 +16,14 @@ const Login = () => {
     authService.getCurrentUser()
       .then((userData) => {
         console.log('bbq', userData)
-        if (userData) {confirm.log('if k andar')
+        if (userData) {
           setLoading(false)
           dispatch(authLogin(userData))
         }
       })
   }, [])
 
-  return <div>
-    {/* <InputField label='Email' placeholder='Enter your email' /> */}
-    {/* <InputField label='Password' placeholder='Enter your password' /> */}
-    {/* temp button to login */}
-    {/* <Button onClick={() => authService.login({ email: 'abc@abc.com', password: '123456789' })} btnText="Login" className='hover:bg-green-700 duration-500' disabled={false} /> */}
-
-    {/* {loading ? <h1 className='text-4xl text-red-600'>Loading</h1> : <h6 className="text-3xl text-white">react-post</h6>} */}
-    <LoginComponent />
-
-  </div>;
+  return <LoginComponent />
+  
 };
 export default Login;

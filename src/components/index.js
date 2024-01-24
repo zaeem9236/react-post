@@ -8,10 +8,13 @@ import PostForm from "./PostForm/PostForm";
 import RTE from './RTE/RTE';
 import Select from './Select/Select'
 import PostCard from './PostCard/PostCard'
+import Logo from "./Logo/Logo";
+import Spinner from "./Spinner/Spinner";
 
 export {
     Header,
     Footer,
+    Logo,
     Container,
     Button,
     InputField,
@@ -19,5 +22,6 @@ export {
     PostForm,
     RTE,
     Select,
-    PostCard
+    PostCard,
+    Spinner
 }

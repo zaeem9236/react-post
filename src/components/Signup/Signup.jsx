@@ -43,7 +43,7 @@ export const Signup = () => {
                     Already have an account?&nbsp;
                     <Link
                         to="/"
-                        className="font-medium text-primary transition-all duration-200 hover:underline"
+                        className="text-blue-500 hover:text-blue-800 font-medium text-primary transition-all duration-200"
                     >
                         Sign In
                     </Link>

@@ -2,14 +2,14 @@
 const Button = ({
     btnText,
     type = 'button',
-    bgColor = 'bg-blue-500',
+    bgColor = 'bg-green-600',
     textColor = 'text-white',
     className = '',
     ...props
 }) => {
-
+    const bgColorSplit = bgColor.split('-')
     return <button
-        className={`${bgColor} ${textColor} hover:bg-blue-700 font-bold py-2 px-4 rounded ${className}`} {...props}>
+        className={`${textColor} ${bgColor} hover:bg-${bgColorSplit[1]}-${Number(bgColorSplit[2])+200} font-bold py-2 px-4 rounded ${className}`} {...props}>
         {btnText}
     </button>
 
