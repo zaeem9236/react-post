@@ -2,7 +2,7 @@ import React from 'react'
 import { dbService } from "../../appwrite/db"
 import { Link } from 'react-router-dom'
 
-function PostCard({ $id, title, featuredImage, status }) {
+function PostCard({ $id, title, featuredImage, status, userId, currentUser }) {
 
   return (
     // <Link to={`/post/${$id}`}>
@@ -26,10 +26,24 @@ function PostCard({ $id, title, featuredImage, status }) {
         </div>
         <div className="p-5 h-1/4 ">
           <h5 className="mb-2 text-md font-medium tracking-tight text-gray-900 dark:text-white">{`${title.length > 25 ? title.substring(0, 25) + '...' : title}`}</h5>
-          <p className='flex items-center'>
-            <span className={`w-3 h-3  rounded-full ${status == 'active' ? 'bg-green-500' : 'bg-red-500'}`}></span>
-            <p>&nbsp;&nbsp;{status}</p>
-          </p>
+          <div className='flex justify-between items-center'>
+            <div>
+              <span className={`${status == 'active' ? 'dark:bg-green-900 dark:text-green-300' : 'dark:bg-red-900 dark:text-red-300'} inline-flex items-center  text-xs font-medium px-2.5 py-0.5 rounded-full`}>
+                <span className={`w-2 h-2 me-1 ${status == 'active'? 'bg-green-500' : 'bg-red-500'}  rounded-full`}></span>
+                {status}
+              </span>
+            </div>
+
+            <div>
+              {userId == currentUser ? (
+                <span className="inline-flex items-center bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">
+                  <span className="w-2 h-2 me-1 bg-blue-500 rounded-full"></span>
+                  Owner
+                </span>
+              ) : null}
+
+            </div>
+          </div>
         </div>
       </div>
     </Link>

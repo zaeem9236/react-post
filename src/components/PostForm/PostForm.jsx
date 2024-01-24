@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { Button, InputField, RTE, Select } from "../index";
 import { dbService } from "../../appwrite/db";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function PostForm({ post }) {
