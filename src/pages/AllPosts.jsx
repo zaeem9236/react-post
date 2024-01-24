@@ -10,6 +10,7 @@ function AllPosts() {
     dbService.getPosts([]).then((posts) => {
       if (posts) {
         setPosts(posts.documents)
+        console.log('akram', posts)
       }
     })
     setLoader(false)

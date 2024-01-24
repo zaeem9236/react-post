@@ -2,7 +2,7 @@ import React from 'react'
 import { dbService } from "../../appwrite/db"
 import { Link } from 'react-router-dom'
 
-function PostCard({ $id, title, featuredImage }) {
+function PostCard({ $id, title, featuredImage, status }) {
 
   return (
     // <Link to={`/post/${$id}`}>
@@ -26,6 +26,10 @@ function PostCard({ $id, title, featuredImage }) {
         </div>
         <div className="p-5 h-1/4 ">
           <h5 className="mb-2 text-md font-medium tracking-tight text-gray-900 dark:text-white">{`${title.length > 25 ? title.substring(0, 25) + '...' : title}`}</h5>
+          <p className='flex items-center'>
+            <span className={`w-3 h-3  rounded-full ${status == 'active' ? 'bg-green-500' : 'bg-red-500'}`}></span>
+            <p>&nbsp;&nbsp;{status}</p>
+          </p>
         </div>
       </div>
     </Link>

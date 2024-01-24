@@ -6,18 +6,19 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function PostForm({ post }) {
-    const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
+    const { register, handleSubmit, watch, setValue, control, getValues, formState: {errors} } = useForm({
         defaultValues: {
-            title: post?.title || "from the beginning",
-            slug: post?.$id || "from-the-beginning",
-            content: post?.content || "hello world",
+            title: post?.title || "",
+            slug: post?.$id || "",
+            content: post?.content || "",
             status: post?.status || "active",
         },
     });
 
+
     const navigate = useNavigate();
     const userData = useSelector((state) => state.authSlice.userData);
-    
+
     const submit = async (data) => {
         console.log('userData  -->  ', userData)
 
@@ -36,9 +37,10 @@ export default function PostForm({ post }) {
             if (dbPost) {
                 navigate(`/post/${dbPost.$id}`);
             }
-        } else { console.log('else part');console.log('else par -- ', data.image[0])
+        } else {
+            console.log('else part'); console.log('else par -- ', data.image[0])
             const file = data.image[0] ? await dbService.uploadFile(data.image[0]) : null;
-            
+
             if (file) {
                 const fileId = file.$id;
                 data.featuredImage = fileId;
@@ -79,18 +81,30 @@ export default function PostForm({ post }) {
                 <InputField
                     label="Title :"
                     placeholder="Title"
-                    {...register("title", { required: true })}
+                    {...register("title", { 
+                        required: { value: true, message: 'Invalid Title' },
+                        minLength: { value: 5, message: 'Title must be at least 5 characters long' },
+                        maxLength: { value: 50, message: 'Title cannot exceed 50 characters' },
+                     })}
                     className="mb-4"
                 />
+                {errors?.title?.message && <p className="text-red-600 pb-1 text-center">{errors.title.message}</p>}
+
                 <InputField
                     label="Slug :"
                     placeholder="Slug"
-                    {...register("slug", { required: true })}
+                    {...register("slug", { 
+                        required: { value: true, message: 'Invalid Slug' },
+                        minLength: { value: 5, message: 'Slug must be at least 5 characters long' },
+                        maxLength: { value: 50, message: 'Slug cannot exceed 50 characters' },
+                     })}
                     onInput={(e) => {
                         setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
                     }}
                     className="mb-4"
                 />
+                {errors?.slug?.message && <p className="text-red-600 pb-1 text-center">{errors.slug.message}</p>}
+
                 <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
             </div>
             <div className="w-1/3 px-2">
@@ -99,8 +113,10 @@ export default function PostForm({ post }) {
                     type="file"
                     className="mb-4"
                     accept="image/png, image/jpg, image/jpeg, image/gif"
-                    {...register("image", { required: /*!post*/ false })}
+                    {...register("image", { 
+                        required: { value: true,  message: 'No Image Uploaded' } })}
                 />
+                {errors?.image?.message && <p className="text-red-600 pb-1 text-center">{errors.image.message}</p>}
                 {post && (
                     <div className="w-full mb-4">
                         <img
@@ -124,6 +140,8 @@ export default function PostForm({ post }) {
                     className="w-full">
 
                 </Button>
+                {/* <p>{JSON.stringify(errors)}</p> */}
+
             </div>
         </form>
     );
