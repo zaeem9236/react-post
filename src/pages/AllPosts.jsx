@@ -21,8 +21,8 @@ function AllPosts() {
   }, [])
 
   return loader ? (<Spinner />) : (
-    <div className='w-full py-8'>
-      <div className='flex flex-wrap'>
+    <div className='max-w-full p-8'>
+      <div className='flex flex-wrap justify-around'>
         {posts.map((post, index) => (
           <div key={post.$id} className='p-2 w-1/4'>
             <PostCard {...post} currentUser={currentUser} />
