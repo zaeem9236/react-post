@@ -22,8 +22,8 @@ export function Login() {
             // console.log('session', session)
             if (session) {
                 const userData = await authService.getCurrentUser()
-                console.log('ppz', userData)
                 if(userData) {dispatch(authLogin(userData))
+                    console.log('printing user data', userData)
                 navigate("/")
                 }
             }

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { login as authLogin } from '../redux/slices/authSlice'
 import { authService } from '../appwrite/auth'
 
-import {Login as LoginComponent} from "../components/Login/Login";
+import { Login as LoginComponent } from "../components/Login/Login";
 
 
 
@@ -15,8 +15,11 @@ const Login = () => {
   useEffect(() => {
     authService.getCurrentUser()
       .then((userData) => {
-        setLoading(false)
-        dispatch(authLogin(userData))
+        console.log('bbq', userData)
+        if (userData) {confirm.log('if k andar')
+          setLoading(false)
+          dispatch(authLogin(userData))
+        }
       })
   }, [])
 
@@ -27,7 +30,7 @@ const Login = () => {
     {/* <Button onClick={() => authService.login({ email: 'abc@abc.com', password: '123456789' })} btnText="Login" className='hover:bg-green-700 duration-500' disabled={false} /> */}
 
     {/* {loading ? <h1 className='text-4xl text-red-600'>Loading</h1> : <h6 className="text-3xl text-white">react-post</h6>} */}
-<LoginComponent />
+    <LoginComponent />
 
   </div>;
 };

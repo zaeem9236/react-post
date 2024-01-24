@@ -1,4 +1,4 @@
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux"
 import { authService } from "../../appwrite/auth"
 import { logout } from "../../redux/slices/authSlice"
@@ -6,11 +6,19 @@ import { logout } from "../../redux/slices/authSlice"
 
 export const Header = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const loggedIn = useSelector(state => state?.authSlice?.status)
-    console.log('LLM', loggedIn)
     const handleLogout = () => {
+        // authService.getCurrentUser()
+        // .then((data1) => console.log('data1',data1))
+        // .catch(e1 => console.log('e1',e1))
+        
         authService.logout()
-            .then((data) => dispatch(logout()))
+            .then((data) => {
+                console.log('dd', data)
+                dispatch(logout())
+                navigate('/')
+            })
             .catch(err => console.log(err))
     }
 
