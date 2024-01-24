@@ -69,7 +69,7 @@ export const Header = () => {
                         <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                             {navItems.map((item) => item.active ? (
                                 <li key={item.name}>
-                                    <Link to={item.path} className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">{item.name}</Link>
+                                    <NavLink to={item.path} className={({isActive}) => `block  pl-3 pr-4 ${isActive? 'text-blue-500' : 'text-white hover:text-blue-500'}`} aria-current="page">{item.name}</NavLink>
                                 </li>
                             )
                                 :
