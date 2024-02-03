@@ -20,7 +20,6 @@ export default function PostForm({ post }) {
     const userData = useSelector((state) => state.authSlice.userData);
 
     const submit = async (data) => {
-        console.log('userData  -->  ', userData)
 
         if (post) {
             const file = data.image[0] ? await dbService.uploadFile(data.image[0]) : null;
@@ -38,15 +37,12 @@ export default function PostForm({ post }) {
                 navigate(`/post/${dbPost.$id}`);
             }
         } else {
-            console.log('else part'); console.log('else par -- ', data.image[0])
             const file = data.image[0] ? await dbService.uploadFile(data.image[0]) : null;
 
             if (file) {
                 const fileId = file.$id;
                 data.featuredImage = fileId;
-                console.log('userData: ', userData)
                 const dbPost = await dbService.createPost({ ...data, userId: userData.$id });
-                console.log(dbPost)
                 if (dbPost) {
                     navigate(`/post/${dbPost.$id}`);
                 }
@@ -76,8 +72,8 @@ export default function PostForm({ post }) {
     }, [watch, slugTransform, setValue]);
 
     return (
-        <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
-            <div className="w-2/3 px-2">
+        <form onSubmit={handleSubmit(submit)} className="flex sm: justify-center flex-wrap">
+            <div className="w-10/12 lg:w-2/5 px-2">
                 <InputField
                     label="Title :"
                     placeholder="Title"
@@ -105,9 +101,8 @@ export default function PostForm({ post }) {
                 />
                 {errors?.slug?.message && <p className="text-red-600 pb-1 text-center">{errors.slug.message}</p>}
 
-                <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
             </div>
-            <div className="w-1/3 px-2">
+            <div className="w-10/12 lg:w-2/5 px-2">
                 <InputField
                     label="Featured Image :"
                     type="file"
@@ -140,8 +135,10 @@ export default function PostForm({ post }) {
                     className="w-full">
 
                 </Button>
-                {/* <p>{JSON.stringify(errors)}</p> */}
 
+            </div>
+            <div className="p-8">
+                <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
             </div>
         </form>
     );

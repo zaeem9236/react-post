@@ -7,9 +7,6 @@ import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 
 export const Signup = () => {
-    // const nameRef = useRef(null)
-    // const emailRef = useRef(null)
-    // const passwordRef = useRef(null)
 
     const navigate = useNavigate()
     const [error, setError] = useState("")
@@ -31,7 +28,7 @@ export const Signup = () => {
     }
 
     return (
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center w-full mt-12 p-4">
             <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>
                 <div className="mb-2 flex justify-center">
                     <span className="inline-block w-full max-w-[100px]">
@@ -78,16 +75,13 @@ export const Signup = () => {
                         label="Password: "
                         type="password"
                         placeholder="Enter your password"
-                        // ref={passwordRef}
                     {...register("password", {
                         required: true,})}
                     />
                     <Button
                         btnText='Signup'
-                        // type="submit"
                         className="w-full"
                         onClick={() => { 
-                            // console.log('Signup', nameRef.current.value, emailRef.current.value, passwordRef.current.value) 
                             createAccount({name: nameRef.current.value, email: emailRef.current.value, password: passwordRef.current.value})
                             }}>
                         Create Account

@@ -1,6 +1,6 @@
 import { PostForm } from '../components/index'
 const AddPost = () => {
-  return <div>
+  return <div className='h-screen'>
     <PostForm />
   </div>;
 };

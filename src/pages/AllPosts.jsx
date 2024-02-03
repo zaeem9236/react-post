@@ -24,7 +24,7 @@ function AllPosts() {
     <div className='max-w-full p-8'>
       <div className='flex flex-wrap justify-around'>
         {posts.map((post, index) => (
-          <div key={post.$id} className='p-2 w-1/4'>
+          <div key={post.$id} className='p-2 w-full lg:w-1/4'>
             <PostCard {...post} currentUser={currentUser} />
           </div>
         ))}

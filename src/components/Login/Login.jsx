@@ -7,34 +7,30 @@ import { authService } from "../../appwrite/auth"
 import { useForm } from "react-hook-form"
 
 export function Login() {
-    const emailRef = useRef(null)
-    const passwordRef = useRef(null)
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { register, handleSubmit } = useForm()
     const [error, setError] = useState("")
 
-    const login = async(data) => {console.log(data)
+    const login = async(data) => {
         setError("")
         try {
             const session = await authService.login(data)
-            // console.log('session', session)
             if (session) {
                 const userData = await authService.getCurrentUser()
                 if(userData) {dispatch(authLogin(userData))
-                    console.log('printing user data', userData)
                 navigate("/")
                 }
             }
-        } catch (error) {console.log('err22', error)
+        } catch (error) {
             setError(error.message)
         }
     }
 
     return (
         <div
-            className='flex  items-center justify-center w-full'
+            className='flex  items-center justify-center w-full mt-12 p-4'
         >
             <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>
                 <div className="mb-2 flex justify-center">
@@ -57,7 +53,6 @@ export function Login() {
                             label="Email: "
                             placeholder="Enter your email"
                             type="email"
-                            // ref={emailRef}
                         {...register("email", {
                             required: true,
                             validate: {
@@ -70,7 +65,6 @@ export function Login() {
                             label="Password: "
                             type="password"
                             placeholder="Enter your password"
-                            // ref={passwordRef}
                         {...register("password", {
                             required: true,
                         })}
@@ -79,7 +73,6 @@ export function Login() {
                             btnText='Login'
                             type="submit"
                             className="w-full"
-                            // onClick={()=>{login({email: emailRef.current.value, password: passwordRef.current.value})}}
                         >Sign in</Button>
                     </div>
                 </form>

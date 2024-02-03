@@ -13,7 +13,6 @@ export default function Post() {
     const navigate = useNavigate();
 
     const userData = useSelector((state) => state.authSlice.userData);
-    console.log('L1', post)
     const isAuthor = post && userData ? post.userId === userData.$id : false;
 
     useEffect(() => {
