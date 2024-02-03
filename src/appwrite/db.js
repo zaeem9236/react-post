@@ -52,7 +52,7 @@ export class DbService {
         }
     }
 
-    async daletePost(slug) {
+    async deletePost(slug) {
         try {
             await this.databases.deleteDocument(
                 config.appwriteDatabaseId,
@@ -87,7 +87,7 @@ export class DbService {
                 queries
             )
         } catch (error) {
-            onsole.log("Appwrite service :: getPosts :: error", error)
+            console.log("Appwrite service :: getPosts :: error", error)
             return false
         }
     }
