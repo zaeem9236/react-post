@@ -10,7 +10,7 @@ const Home = () => {
           </svg>
           <blockquote>
             <p className="text-2xl font-medium text-gray-900 dark:text-white">
-              "Welcome to <span className="text-orange-700">React post</span>, a platform where users can both write and read blogs. Whether you're looking to share your own thoughts or discover new perspectives, you're in the right place. Join us in fostering a vibrant exchange of ideas and stories at React Post"
+              "Welcome1 to <span className="text-orange-700">React post</span>, a platform where users can both write and read blogs. Whether you're looking to share your own thoughts or discover new perspectives, you're in the right place. Join us in fostering a vibrant exchange of ideas and stories at React Post"
             </p>
           </blockquote>
         </figure>
