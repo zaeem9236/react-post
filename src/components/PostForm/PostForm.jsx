@@ -124,7 +124,7 @@ export default function PostForm({ post }) {
                 <Select
                     options={["active", "inactive"]}
                     label="Status"
-                    className="mb-4"
+                    className="mb-4 dark:bg-gray-700  text-white border-gray-600"
                     {...register("status", { required: true })}
                 />
                 <Button
