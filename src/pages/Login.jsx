@@ -15,7 +15,6 @@ const Login = () => {
   useEffect(() => {
     authService.getCurrentUser()
       .then((userData) => {
-        console.log('bbq', userData)
         if (userData) {
           setLoading(false)
           dispatch(authLogin(userData))
