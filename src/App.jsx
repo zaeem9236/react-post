@@ -6,7 +6,7 @@ import Login from './pages/Login'
 function App() {
   
   return (
-    <div className={`h-screen w-screen bg-gray-200 dark:bg-gray-900`}>
+    <div className={`h-screen w-screen overflow-y-scroll	 bg-gray-200 dark:bg-gray-900`}>
       <Header />
         <Outlet />
       <Footer />
